@@ -2,29 +2,30 @@
     <section>
         <h1>Sign Up form</h1>
         <div class="container">
-           
-                <div class="form-group">
-                    <label for="firstname">First name: </label>
-                    <input type="text" id="firstname" placeholder="first name" v-model="firstName">
-                </div>
-                <div class="form-group">
-                    <label for="lasttname">Last name: </label>
-                    <input type="text" id="lasttname" placeholder="last name" v-model="lastName">
-                </div>
-                <div class="form-group">
-                    <label for="password">Email: </label>
-                    <input type="text" id="email" placeholder="email here" v-model="email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password: </label>
-                    <input type="password" id="password" placeholder="password" v-model="password">
-                </div>
-                <div class="form-group">
-                    <label for="mobile">Mobile no: </label>
-                    <input type="number" id="mobile" placeholder="mobile" v-model="mobile_number">
-                </div>
-                <button v-on:click="signUp">Sing Up</button>
-           
+
+            <div class="form-group">
+                <label for="firstname">First name: </label>
+                <input type="text" id="firstname" placeholder="first name" v-model="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lasttname">Last name: </label>
+                <input type="text" id="lasttname" placeholder="last name" v-model="lastName">
+            </div>
+            <div class="form-group">
+                <label for="password">Email: </label>
+                <input type="text" id="email" placeholder="email here" v-model="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" id="password" placeholder="password" v-model="password">
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile no: </label>
+                <input type="number" id="mobile" placeholder="mobile" v-model="mobile_number">
+            </div>
+            <button v-on:click="signUp">Sing Up</button>
+            <br>
+            <p><router-link to="/log-in">If you have registered tap here to LogIn</router-link></p>
         </div>
     </section>
 </template>
@@ -41,24 +42,30 @@ export default {
             password: "",
             mobile_number: ''
         }
-    },
-    methods: {
-     async signUp(){
-        const result =await axios.post('http://localhost:5000/api/user-registration',{
-            firstName : this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password : this.password,
-            mobile_number: this.mobile_number
-        })
-        console.warn('result>>>',result);
-        if(result.data.statusCode==200){
-            alert('signup call sucessfully')
-            console.warn('item>>',JSON.stringify(result.data))
-            localStorage.setItem('user-register>',JSON.stringify(result.data))
+    },  
+    methods: {      
+        async signUp() {
+            const result = await axios.post('http://localhost:5000/api/user-registration', {
+                firstName: this.firstName,
+                lastName: this.lastName,
+                email: this.email,
+                password: this.password,
+                mobile_number: this.mobile_number
+            })
+            console.warn('result>>>', result);
+            if (result.data.statusCode == 200) {
+                console.warn('item>>', JSON.stringify(result.data))
+                localStorage.setItem('user-register>', JSON.stringify(result.data))
+                this.$router.push({ name: 'Home' })
+            }
+            console.warn('Sign up', this.firstName, this.lastName, this.email, this.password, this.mobile_number)
         }
-        console.warn('Sign up', this.firstName,this.lastName, this.email, this.password, this.mobile_number)
-      }
+    },
+    mounted() {
+        const user = localStorage.getItem('user-register>');
+        if (user) {
+            this.$router.push({ name: 'Home' })
+        }
     }
 }
 </script>

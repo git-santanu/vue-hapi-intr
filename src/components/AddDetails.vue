@@ -37,19 +37,20 @@ export default {
     methods: {
         async addUser() {
             console.warn('User add info', this.name, this.email, this.password);
-            const result = await axios.post('http://localhost:3005/api/add',{
+            const result = await axios.post('http://localhost:3005/api/add', {
                 name: this.name,
                 email: this.email,
                 password: this.password
             });
-            console.warn('User addition>>',result);
-            if(result.data){
+            console.warn('User addition>>', result);
+            if (result.data) {
                 alert('Details added successfully');
-                localStorage.setItem('user-add', JSON.stringify(result.data))
+                localStorage.setItem('user-add', JSON.stringify(result.data));
+                this.$router.push({ name: 'Home' })
             };
-            this.name= '',
-            this.email='',
-            this.password=''
+            this.name = '',
+                this.email = '',
+                this.password = ''
         }
     }
 }

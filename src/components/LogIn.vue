@@ -39,10 +39,10 @@ export default {
                 this.$router.push({ name: 'Home' });
                 localStorage.setItem('user-login>', JSON.stringify(result.data))
             } else if (result.data.statusCode == 400) {
-                this.$router.push({name: 'SignUp'})
-            }else{
+                this.$router.push({ name: 'SignUp' })
+            } else {
                 alert('internal error: 500')
-            }                                                                                                                                              
+            }
         }
     },
     mounted() {

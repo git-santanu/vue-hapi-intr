@@ -42,8 +42,8 @@ export default {
             password: "",
             mobile_number: ''
         }
-    },  
-    methods: {      
+    },
+    methods: {
         async signUp() {
             const result = await axios.post('http://localhost:5000/api/user-registration', {
                 firstName: this.firstName,
@@ -106,7 +106,6 @@ section {
     border: 1px solid rgba(128, 128, 128, 0.199);
     margin-top: 5px;
 }
-
 button {
     width: 100%;
     border: none;
@@ -117,4 +116,5 @@ button {
     margin-top: 10px;
     background-color: aqua;
 }
+
 </style>
